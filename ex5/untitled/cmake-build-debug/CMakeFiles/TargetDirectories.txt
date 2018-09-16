@@ -1,0 +1,3 @@
+/home/or/Desktop/מבנה מחשב/ex5/untitled/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/or/Desktop/מבנה מחשב/ex5/untitled/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/or/Desktop/מבנה מחשב/ex5/untitled/cmake-build-debug/CMakeFiles/untitled.dir

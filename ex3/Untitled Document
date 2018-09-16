@@ -1,0 +1,105 @@
+.data
+inputOfInt: .string "%d"
+inputOfString: .string "%s"
+
+.text
+.global main
+.type   main, @function
+main:
+
+    pushq   %rbp
+    movq    %rsp, %rbp
+    
+    # get first number.
+    subq    $4, %rsp	        # allocate place for int
+    movq    $inputOfInt, %rdi	# rdi is the first argumrnt
+    movq    %rsp, %rsi        	# scan the input into the stack - copy adress of rsp to rsi
+    movq    $0, %rax
+    call    scanf
+    
+    movq    (%rsp), %rsi        	# scan the input into the stack
+    movq    $inputOfInt ,%rdi	#the string is the only paramter passed to the printf function.
+    movq    $0,%rax
+    call	printf
+    
+    # get first string
+    movzbq  (%rsp), %rdi     	# take x into rdi (instead the address until now)
+    subq    %rdi, %rsp		# rdi is the first argumnet.
+    subq    $2, %rsp             # for length and '/0'
+    movq    %rsp, %rsi           # parameter before function
+    movq    $0, %rax
+    call    getString		
+    movq    %rax, %rbx       	# move the addres of first string to rbx
+    
+    
+    movq    %rsp, %rsi        	# scan the input into the stack
+    movq    $inputOfString ,%rdi	#the string is the only paramter passed to the printf function.
+    movq	   $0,%rax
+    call	   printf 
+    
+    
+    
+    
+    
+    # get second number
+    subq    $4, %rsp		# allocate place for int
+    movq    %rsp, %rsi      	# rsi will get the address of rsp
+    movq    $inputOfInt, %rdi	# rdi is the first argument
+    movq    $0, %rax
+    call    scanf  
+    
+    movq    (%rsp), %rsi        	# scan the input into the stack
+    movq    $inputOfInt ,%rdi	#the string is the only paramter passed to the printf function.
+    movq    $0,%rax
+    call	   printf         
+    
+    # get second string 
+    movzbq  (%rsp), %rdi    	# take x into rdi(instead the address until now
+    subq    %rdi, %rsp	        # rdi is the first argumnet.
+    subq    $2, %rsp		# for length and '/0'
+    movq    %rsp, %rsi		
+    movq    $0, %rax
+    call    getString		
+    movq    %rax, %r13          # move the addres of first string to r13
+    
+    
+  
+    movq    %rsp, %rsi        	# scan the input into the stack
+    movq    $inputOfString ,%rdi	#the string is the only paramter passed to the printf function.
+    movq	   $0,%rax
+    call   printf
+    
+    # get the number case from user
+    subq    $4, %rsp            # allocate place for int
+    movq    %rsp, %rsi      	# rsi will get the address of rsp
+    movq    $inputOfInt, %rdi	# rdi is the first argument
+    movq    $0, %rax
+    call    scanf    
+    movzbq    (%rsp), %rdi      # took the first byte that rsp point him and put in rdi.
+    addq    $4, %rsp            # return rsp to the previous place
+    
+    movq    %rbx, %rsi
+    movq    %r13, %rdx
+    movq    $0, %rax
+    call    run_func
+    movq    %rbp, %rsp
+    popq    %rbp
+    ret
+
+
+
+
+getString:
+    pushq   %r12		         # calle-saved resgister - backup
+    movb    %dil, (%rsi)          # rsp get the length to first place from rdi
+    movq    %rsi, %r12            # r12 save the start of the pstring 
+     
+    movq    $inputOfString, %rdi  # put the format in rdi
+    movq    $0, %rax
+    call    scanf               
+    movq    %r12, %rax            # rax is return value
+    popq    %r12		         # restore r12
+    ret
+
+
+

@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/or/Desktop/מבנה מחשב/ex1/ex1.c
+stdio.h
+-
+
+/home/or/Desktop/מבנה מחשב/ex1/ex1.h
+
+/home/or/Desktop/מבנה מחשב/ex1/main.c
+stdio.h
+-
+ex1.h
+/home/or/Desktop/מבנה מחשב/ex1/ex1.h
+
